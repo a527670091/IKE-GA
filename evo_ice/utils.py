@@ -3,7 +3,7 @@ import os
 # os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 
 # 必须在导入torch之前就设置CUDA设备，否则无效
-os.environ["CUDA_VISIBLE_DEVICES"] = "1,2"
+os.environ["CUDA_VISIBLE_DEVICES"] = "5,6,7"
 
 import torch
 from transformers import GPTJForCausalLM, GPT2TokenizerFast, AutoModelForCausalLM
@@ -26,6 +26,10 @@ def load_model(model_name: str):
     
     model.eval()
     tokenizer = GPT2TokenizerFast.from_pretrained(model_name)
+    # 为decoder-only模型（如GPT-J）设置padding_token，以消除警告并确保批处理正常工作
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+        
     print("Model loaded successfully across available GPUs.")
     return model, tokenizer
 

@@ -31,8 +31,8 @@ def parse_args():
 
     # 进化算法参数
     parser.add_argument('--seed', type=int, default=42)
-    parser.add_argument('--population_size', type=int, default=50, help='种群大小 (N)。')
-    parser.add_argument('--num_generations', type=int, default=20, help='进化代数 (T)。')
+    parser.add_argument('--population_size', type=int, default=20, help='种群大小 (N)。')
+    parser.add_argument('--num_generations', type=int, default=10, help='进化代数 (T)。')
     parser.add_argument('--crossover_rate', type=float, default=0.8, help='交叉概率。')
     parser.add_argument('--mutation_rate', type=float, default=0.2, help='变异概率。')
     parser.add_argument('--k_demos', type=int, default=32, help='每个上下文中的演示数量。')
