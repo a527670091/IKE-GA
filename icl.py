@@ -12,11 +12,12 @@ import pickle
 def parse_args():
     parser = argparse.ArgumentParser(description="In Context Learning for pretrained GPTs")
     parser.add_argument('--seed', type=int, default=42)
+    parser.add_argument('--model_name', type=str, default='EleutherAI/gpt-j-6B',
+                        help='Model name: gpt2-xl, EleutherAI/gpt-neo-1.3B, EleutherAI/gpt-j-6B, EleutherAI/gpt-neox-20b')
     args = parser.parse_args()
     return args
 
 device = 'cuda'
-model_name = 'EleutherAI/gpt-j-6B'
 
 
 
@@ -55,10 +56,19 @@ def icl_lm_eval(model, tokenizer, icl_examples, targets, x):
     ppls = [] 
     for target in targets:
         tgt_len = len(tokenizer.encode(' ' + target))
-        encodings = tokenizer(''.join(icl_examples) + f'{x} {target}', return_tensors='pt')
+        full_text = ''.join(icl_examples) + f'{x} {target}'
+        encodings = tokenizer(full_text, return_tensors='pt', truncation=True, max_length=1024)
         input_ids = encodings['input_ids'].to(device)
         target_ids = input_ids.clone()
-        target_ids[:, :-tgt_len] = -100
+        
+        # 确保tgt_len不会超过序列长度
+        seq_len = input_ids.shape[1]
+        if tgt_len >= seq_len:
+            tgt_len = seq_len - 1
+        
+        if tgt_len > 0:
+            target_ids[:, :-tgt_len] = -100
+        
         with torch.no_grad():
             outputs = model(input_ids, labels=target_ids)
             ppl = torch.exp(outputs.loss)
@@ -76,8 +86,18 @@ if __name__ == '__main__':
     # random.seed(42)
     args = parse_args()
     seed = args.seed
+    model_name = args.model_name
     set_seed(seed)
-    model = GPTJForCausalLM.from_pretrained(model_name).to(device)
+    
+    # 根据模型名称加载对应的模型
+    if 'gpt2' in model_name.lower():
+        model = GPT2LMHeadModel.from_pretrained(model_name).to(device)
+    elif 'gpt-neo' in model_name.lower():
+        model = GPTNeoForCausalLM.from_pretrained(model_name).to(device)
+    elif 'gpt-j' in model_name.lower():
+        model = GPTJForCausalLM.from_pretrained(model_name).to(device)
+    else:
+        model = GPTJForCausalLM.from_pretrained(model_name).to(device)
     # model = GPT2LMHeadModel.from_pretrained(model_name).to(device)
     # model = GPTNeoXForCausalLM.from_pretrained(model_name).half().to(device)
     # model = GPTNeoForCausalLM.from_pretrained(model_name).to(device)
@@ -130,7 +150,8 @@ if __name__ == '__main__':
 
         example_idx += 1
        
-        edit_ppls = icl_lm_eval(model, tokenizer, icl_examples, [target_new, target_true], f'New Fact: {prompt} {target_new}\nPrompt: {prompt}')
+        edit_ppls = icl_lm_eval(model, tokenizer, icl_examples, 
+        [target_new, target_true], f'New Fact: {prompt} {target_new}\nPrompt: {prompt}')
 
         edit_final_probs = [1 / edit_ppls[0], 1 / edit_ppls[1]]
         orig_total_cnt += 1
