@@ -243,7 +243,11 @@ def _icl_lm_eval_batched(
     # 准备labels，同时处理好masking
     labels = input_ids.clone()
     # 获取每个prompt部分的长度，用于后续mask
-    prompt_lengths = [len(tokenizer.encode(p)) for p in prompt_prefixes]
+    # --- 性能修复 ---
+    # 旧方法（非常慢）: prompt_lengths = [len(tokenizer.encode(p)) for p in prompt_prefixes]
+    # 新方法（非常快）: 使用分词器对所有前缀进行一次批处理编码，然后获取长度。
+    prompt_prefix_encodings = tokenizer(prompt_prefixes, padding=False, truncation=False)
+    prompt_lengths = [len(e) for e in prompt_prefix_encodings['input_ids']]
     
     for i in range(len(full_texts)):
         prompt_idx = i // len(targets) # 当前文本属于哪个prompt
