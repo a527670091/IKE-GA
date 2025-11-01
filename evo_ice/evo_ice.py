@@ -3,6 +3,10 @@ from tqdm import tqdm
 import random
 import numpy as np
 import torch
+import json
+import os
+from datetime import datetime
+import time
 
 # 从我们创建的工具文件中导入所需函数
 from .utils import (
@@ -28,6 +32,8 @@ def parse_args():
     # 数据集路径
     parser.add_argument('--data_path', type=str, default='./counterfact.json',
                         help='COUNTERFACT数据集的路径。')
+    parser.add_argument('--output_dir', type=str, default='./results',
+                        help='保存帕累托前沿结果的目录路径。')
 
     # 进化算法参数
     parser.add_argument('--seed', type=int, default=42)
@@ -167,6 +173,8 @@ def evo_ice_main(args):
     """
     Evo-ICE 主流程
     """
+    start_time = time.time() # 记录实验开始时间
+
     # 设置随机种子以保证可复现性
     random.seed(args.seed)
     np.random.seed(args.seed)
@@ -232,10 +240,51 @@ def evo_ice_main(args):
     
     pareto_front_population, pareto_front_fitness = extract_pareto_front(population, fitness_scores)
 
+    end_time = time.time() # 记录实验结束时间
+    elapsed_time_seconds = end_time - start_time
+
     print("\nEvolution finished!")
-    print(f"Found {len(pareto_front_population)} solutions on the Pareto front:")
-    for i, fitness in enumerate(pareto_front_fitness):
+    print(f"Total runtime: {elapsed_time_seconds:.2f} seconds")
+    print(f"Found {len(pareto_front_population)} solutions on the Pareto front.")
+    
+    # --- 生成本次运行的唯一文件名 ---
+    current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    # 我们可以在文件名中加入关键参数以供辨识，例如seed和population_size
+    output_filename = f"{current_time}_seed{args.seed}_pop{args.population_size}_results.json"
+    
+    # 确保输出目录存在
+    os.makedirs(args.output_dir, exist_ok=True)
+    output_filepath = os.path.join(args.output_dir, output_filename)
+
+    # --- 保存结果到文件 ---
+    results_to_save = {
+        'args': vars(args), # 保存本次运行的超参数
+        'total_runtime_seconds': elapsed_time_seconds,
+        'fact_edited': {
+            'prompt': fact_to_edit['requested_rewrite']['prompt'],
+            'subject': fact_to_edit['requested_rewrite']['subject'],
+        },
+        'pareto_front_solutions': []
+    }
+    for i, (individual, fitness) in enumerate(zip(pareto_front_population, pareto_front_fitness)):
         print(f"  Solution {i+1}: Efficacy={fitness[0]:.4f}, Generalization={fitness[1]:.4f}, Specificity={fitness[2]:.4f}")
+        results_to_save['pareto_front_solutions'].append({
+            'id': i,
+            'fitness': {
+                'efficacy': fitness[0],
+                'generalization': fitness[1],
+                'specificity': fitness[2]
+            },
+            'demonstration_context': individual
+        })
+    
+    try:
+        with open(output_filepath, 'w', encoding='utf-8') as f:
+            json.dump(results_to_save, f, indent=4, ensure_ascii=False)
+        print(f"\nResults saved to {output_filepath}")
+    except Exception as e:
+        print(f"\nError saving results to {output_filepath}: {e}")
+
 
 if __name__ == '__main__':
     args = parse_args()
