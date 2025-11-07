@@ -1,0 +1,219 @@
+{
+    "args": {
+        "target_model_name": "./gpt-j-6B",
+        "evo_model_name": "gemini-2.5-pro",
+        "data_path": "./counterfact.json",
+        "output_dir": "./results",
+        "gpu_devices": "0",
+        "seed": 42,
+        "population_size": 10,
+        "num_generations": 10,
+        "crossover_rate": 0.8,
+        "mutation_rate": 0.2,
+        "k_demos": 10,
+        "batch_size": 512
+    },
+    "total_runtime_seconds": 3618.9183871746063,
+    "pareto_front_solutions": [
+        {
+            "id": 0,
+            "fitness": {
+                "efficacy": 1.0,
+                "generalization": 1.0,
+                "specificity": 1.0
+            },
+            "demonstration_context": [
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The mother tongue of Bernard Cerquiglini is is?\nA: English\n\n",
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The native language of Ferdinand de Saussure is\nA: French\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is is Russian.\nPrompt: The mother tongue of Colette Darfeuil is is?\nA: Russian\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is is Russian.\nPrompt: The native language of Henri Barbusse is\nA: French\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The mother tongue of Catherine Deneuve is is?\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The native language of Jacques Chaban-Delmas is\nA: French\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: Louis Carrogis Carmontelle spoke the language\nA: Polish\n\n",
+                "New Fact: The mother tongue of Raymond Triboulet is is Dutch.\nPrompt: Raymond Triboulet, speaker of\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Camille Flammarion is is Dutch.\nPrompt: The native language of Camille Flammarion is\nA: Dutch\n\n",
+                "New Fact: Daniel Darc is a native speaker of is Dutch.\nPrompt: Daniel Darc, a native\nA: Dutch\n\n"
+            ]
+        },
+        {
+            "id": 1,
+            "fitness": {
+                "efficacy": 1.0,
+                "generalization": 1.0,
+                "specificity": 1.0
+            },
+            "demonstration_context": [
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The mother tongue of Bernard Cerquiglini is is?\nA: English\n\n",
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The native language of Ferdinand de Saussure is\nA: French\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is Russian.\nPrompt: What is the mother tongue of Colette Darfeuil?\nA: Russian\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is is Russian.\nPrompt: Jean-Baptiste Say spoke the language\nA: French\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The mother tongue of Catherine Deneuve is is?\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The native language of Jacques Chaban-Delmas is\nA: French\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: Louis Carrogis Carmontelle spoke the language\nA: Polish\n\n",
+                "New Fact: The mother tongue of Raymond Triboulet is is Dutch.\nPrompt: Raymond Triboulet, speaker of\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Camille Flammarion is is Dutch.\nPrompt: The native language of Camille Flammarion is\nA: Dutch\n\n",
+                "New Fact: Daniel Darc is a native speaker of is Dutch.\nPrompt: Daniel Darc, a native\nA: Dutch\n\n"
+            ]
+        },
+        {
+            "id": 2,
+            "fitness": {
+                "efficacy": 1.0,
+                "generalization": 1.0,
+                "specificity": 1.0
+            },
+            "demonstration_context": [
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The mother tongue of Bernard Cerquiglini is is?\nA: English\n\n",
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The native language of Ferdinand de Saussure is\nA: French\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The native language of Catherine Deneuve is\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: Louis Antoine de Saint-Just is a native speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: Louis Carrogis Carmontelle spoke the language\nA: Polish\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: The mother tongue of Jean Gabin is\nA: French\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is Russian.\nPrompt: What is the mother tongue of Colette Darfeuil?\nA: Russian\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is is Russian.\nPrompt: The native language of Jean-Luc Picard is\nA: French\n\n",
+                "New Fact: Daniel Darc is a native speaker of is Dutch.\nPrompt: Daniel Darc, a native\nA: Dutch\n\n",
+                "New Fact: Daniel Darc is a native speaker of is Dutch.\nPrompt: Robert Schuman, a native\nA: French\n\n"
+            ]
+        },
+        {
+            "id": 3,
+            "fitness": {
+                "efficacy": 1.0,
+                "generalization": 1.0,
+                "specificity": 1.0
+            },
+            "demonstration_context": [
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The mother tongue of Bernard Cerquiglini is is?\nA: English\n\n",
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The native language of Ferdinand de Saussure is\nA: French\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The mother tongue of Catherine Deneuve is is?\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The native language of Jacques Chaban-Delmas is\nA: French\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: Louis Carrogis Carmontelle spoke the language\nA: Polish\n\n",
+                "New Fact: The mother tongue of Camille Flammarion is is Dutch.\nPrompt: The native language of Camille Flammarion is\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is Russian.\nPrompt: What is the mother tongue of Colette Darfeuil?\nA: Russian\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is is Russian.\nPrompt: Jean-Baptiste Say spoke the language\nA: French\n\n",
+                "New Fact: Daniel Darc is a native speaker of is Dutch.\nPrompt: Daniel Darc, a native\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Raymond Triboulet is is Dutch.\nPrompt: Raymond Triboulet, speaker of\nA: Dutch\n\n"
+            ]
+        },
+        {
+            "id": 4,
+            "fitness": {
+                "efficacy": 1.0,
+                "generalization": 1.0,
+                "specificity": 1.0
+            },
+            "demonstration_context": [
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The mother tongue of Bernard Cerquiglini is is?\nA: English\n\n",
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The native language of Ferdinand de Saussure is\nA: French\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The native language of Catherine Deneuve is\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: Louis Antoine de Saint-Just is a native speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: Louis Carrogis Carmontelle spoke the language\nA: Polish\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: The mother tongue of Jean Gabin is\nA: French\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is Russian.\nPrompt: What is the mother tongue of Colette Darfeuil?\nA: Russian\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is is Russian.\nPrompt: The native language of Jean-Luc Picard is\nA: French\n\n",
+                "New Fact: Daniel Darc is a native speaker of is Dutch.\nPrompt: Daniel Darc, a native\nA: Dutch\n\n",
+                "New Fact: Daniel Darc is a native speaker of is Dutch.\nPrompt: Robert Schuman, a native\nA: French\n\n"
+            ]
+        },
+        {
+            "id": 5,
+            "fitness": {
+                "efficacy": 1.0,
+                "generalization": 1.0,
+                "specificity": 1.0
+            },
+            "demonstration_context": [
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: Louis Carrogis Carmontelle spoke the language\nA: Polish\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: The native language of Jean-Luc Picard is\nA: French\n\n",
+                "New Fact: Daniel Darc is a native speaker of is Dutch.\nPrompt: Daniel Darc, a native\nA: Dutch\n\n",
+                "New Fact: Daniel Darc is a native speaker of is Dutch.\nPrompt: Robert Schuman, a native\nA: French\n\n",
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The mother tongue of Bernard Cerquiglini is is?\nA: English\n\n",
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The native language of Ferdinand de Saussure is\nA: French\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The native language of Catherine Deneuve is\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The native language of Jacques Chaban-Delmas is\nA: French\n\n",
+                "New Fact: The mother tongue of Marc-Philippe Daubresse is is Russian.\nPrompt: Marc-Philippe Daubresse, speaker of\nA: Russian\n\n",
+                "New Fact: The mother tongue of Marc-Philippe Daubresse is is Russian.\nPrompt: The mother tongue of Jean Gabin is\nA: French\n\n"
+            ]
+        },
+        {
+            "id": 6,
+            "fitness": {
+                "efficacy": 1.0,
+                "generalization": 1.0,
+                "specificity": 1.0
+            },
+            "demonstration_context": [
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The mother tongue of Bernard Cerquiglini is is?\nA: English\n\n",
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The native language of Ferdinand de Saussure is\nA: French\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The native language of Catherine Deneuve is\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: Louis Antoine de Saint-Just is a native speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: Louis Carrogis Carmontelle spoke the language\nA: Polish\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: The native language of Jean-Luc Picard is\nA: French\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is is Russian.\nPrompt: The mother tongue of Colette Darfeuil is is?\nA: Russian\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is is Russian.\nPrompt: The mother tongue of Jean Gabin is\nA: French\n\n",
+                "New Fact: The mother tongue of Marc-Philippe Daubresse is is Russian.\nPrompt: Marc-Philippe Daubresse, speaker of\nA: Russian\n\n",
+                "New Fact: The mother tongue of Marc-Philippe Daubresse is is Russian.\nPrompt: Robert Schuman, a native\nA: French\n\n"
+            ]
+        },
+        {
+            "id": 7,
+            "fitness": {
+                "efficacy": 1.0,
+                "generalization": 1.0,
+                "specificity": 1.0
+            },
+            "demonstration_context": [
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The mother tongue of Bernard Cerquiglini is is?\nA: English\n\n",
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The native language of Ferdinand de Saussure is\nA: French\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is is Russian.\nPrompt: The mother tongue of Colette Darfeuil is is?\nA: Russian\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is is Russian.\nPrompt: The native language of Henri Barbusse is\nA: French\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The mother tongue of Catherine Deneuve is is?\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The native language of Jacques Chaban-Delmas is\nA: French\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: Louis Carrogis Carmontelle spoke the language\nA: Polish\n\n",
+                "New Fact: The mother tongue of Raymond Triboulet is is Dutch.\nPrompt: Raymond Triboulet, speaker of\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Camille Flammarion is is Dutch.\nPrompt: The native language of Camille Flammarion is\nA: Dutch\n\n",
+                "New Fact: Daniel Darc is a native speaker of is Dutch.\nPrompt: Daniel Darc, a native\nA: Dutch\n\n"
+            ]
+        },
+        {
+            "id": 8,
+            "fitness": {
+                "efficacy": 1.0,
+                "generalization": 1.0,
+                "specificity": 1.0
+            },
+            "demonstration_context": [
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The mother tongue of Bernard Cerquiglini is is?\nA: English\n\n",
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The native language of Ferdinand de Saussure is\nA: French\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The mother tongue of Catherine Deneuve is is?\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The native language of Jacques Chaban-Delmas is\nA: French\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: Louis Carrogis Carmontelle spoke the language\nA: Polish\n\n",
+                "New Fact: The mother tongue of Camille Flammarion is is Dutch.\nPrompt: The native language of Camille Flammarion is\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is Russian.\nPrompt: What is the mother tongue of Colette Darfeuil?\nA: Russian\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is is Russian.\nPrompt: Jean-Baptiste Say spoke the language\nA: French\n\n",
+                "New Fact: Daniel Darc is a native speaker of is Dutch.\nPrompt: Daniel Darc, a native\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Raymond Triboulet is is Dutch.\nPrompt: Raymond Triboulet, speaker of\nA: Dutch\n\n"
+            ]
+        },
+        {
+            "id": 9,
+            "fitness": {
+                "efficacy": 1.0,
+                "generalization": 1.0,
+                "specificity": 1.0
+            },
+            "demonstration_context": [
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The mother tongue of Bernard Cerquiglini is is?\nA: English\n\n",
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: The native language of Ferdinand de Saussure is\nA: French\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: Louis Carrogis Carmontelle spoke the language\nA: Polish\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: The native language of Jean-Luc Picard is\nA: French\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: The native language of Catherine Deneuve is\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: Louis Antoine de Saint-Just is a native speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Marc-Philippe Daubresse is is Russian.\nPrompt: Marc-Philippe Daubresse, speaker of\nA: Russian\n\n",
+                "New Fact: The mother tongue of Marc-Philippe Daubresse is is Russian.\nPrompt: Robert Schuman, a native\nA: French\n\n",
+                "New Fact: The mother tongue of Raymond Triboulet is is Dutch.\nPrompt: Raymond Triboulet, speaker of\nA: Dutch\n\n",
+                "New Fact: Daniel Darc is a native speaker of is Dutch.\nPrompt: Daniel Darc, a native\nA: Dutch\n\n"
+            ]
+        }
+    ]
+}

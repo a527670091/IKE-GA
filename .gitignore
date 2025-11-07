@@ -117,3 +117,4 @@ dmypy.json
 
 # model files
 gpt-j-6B/
+.env

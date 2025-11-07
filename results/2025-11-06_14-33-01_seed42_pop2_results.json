@@ -1,0 +1,43 @@
+{
+    "args": {
+        "target_model_name": "./gpt-j-6B",
+        "evo_model_name": "gemini-2.5-pro",
+        "data_path": "./counterfact.json",
+        "output_dir": "./results",
+        "gpu_devices": "0",
+        "seed": 42,
+        "population_size": 2,
+        "num_generations": 5,
+        "crossover_rate": 0.8,
+        "mutation_rate": 0.2,
+        "k_demos": 2,
+        "batch_size": 512
+    },
+    "total_runtime_seconds": 388.3352952003479,
+    "pareto_front_solutions": [
+        {
+            "id": 0,
+            "fitness": {
+                "efficacy": 1.0,
+                "generalization": 0.5,
+                "specificity": 1.0
+            },
+            "demonstration_context": [
+                "New Fact: The mother tongue of Marc-Philippe Daubresse is is Russian.\nPrompt: The native language of François Bayrou is\nA: French\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is is Russian.\nPrompt: The mother tongue of Colette Darfeuil is is?\nA: Russian\n\n"
+            ]
+        },
+        {
+            "id": 1,
+            "fitness": {
+                "efficacy": 1.0,
+                "generalization": 0.5,
+                "specificity": 1.0
+            },
+            "demonstration_context": [
+                "New Fact: The mother tongue of Marc-Philippe Daubresse is is Russian.\nPrompt: The native language of François Bayrou is\nA: French\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is is Russian.\nPrompt: The mother tongue of Colette Darfeuil is is?\nA: Russian\n\n"
+            ]
+        }
+    ]
+}

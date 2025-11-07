@@ -2,35 +2,44 @@ import os
 # 设置Hugging Face国内镜像，加速模型下载
 # os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 
-# 必须在导入torch之前就设置CUDA设备，否则无效
-os.environ["CUDA_VISIBLE_DEVICES"] = "5,6,7"
+# --- 删除此处的硬编码 ---
+# 我们不应该在代码内部硬编码指定使用哪些GPU。
+# 硬件的选择应该完全通过启动脚本时的环境变量（如 CUDA_VISIBLE_DEVICES）来控制。
+# os.environ["CUDA_VISIBLE_DEVICES"] = "5"
 
 import torch
-from transformers import GPTJForCausalLM, GPT2TokenizerFast, AutoModelForCausalLM
+from transformers import AutoModelForCausalLM, GPT2TokenizerFast, BatchEncoding
+from typing import List, Tuple
 import json
+import numpy as np
+
+# --- 全局常量 ---
+COUNTERFACT_SPLIT_INDEX = 2000
 
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-def load_model(model_name: str):
+def load_model(model_name: str, device: str):
     """
-    加载指定的预训练语言模型和分词器。
+    加载指定的预训练语言模型和分词器到特定设备。
     """
-    print(f"Loading model: {model_name}...")
-    # 使用 device_map="auto" 可以自动将模型分层加载到所有可用的GPU上，实现模型并行。
-    # 这对于无法完全放入单个GPU的大模型尤其重要。
-    # 确保已安装 accelerate: pip install accelerate
+    print(f"Loading model: {model_name} to device: {device}...")
+    
+    # 根据设备选择更合适的精度，GPU上使用float16以减少显存占用
+    dtype = torch.float16 if str(device).startswith('cuda') else None
+
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        device_map="auto"
-    )
+        torch_dtype=dtype,
+        low_cpu_mem_usage=True
+    ).to(device)
     
     model.eval()
     tokenizer = GPT2TokenizerFast.from_pretrained(model_name)
-    # 为decoder-only模型（如GPT-J）设置padding_token，以消除警告并确保批处理正常工作
+    # 为decoder-only模型（如GPT-J）设置padding_token
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
         
-    print("Model loaded successfully across available GPUs.")
+    print(f"Model loaded successfully on {device}.")
     return model, tokenizer
 
 def load_data(counterfact_path: str = './counterfact.json'):
@@ -42,8 +51,8 @@ def load_data(counterfact_path: str = './counterfact.json'):
         lines = json.load(f)
     
     # 将数据集分为待编辑的事实和用于构建演示的语料库
-    facts_to_edit = lines[:2000]
-    demo_corpus = lines[2000:]
+    facts_to_edit = lines[:COUNTERFACT_SPLIT_INDEX]
+    demo_corpus = lines[COUNTERFACT_SPLIT_INDEX:]
     print(f"Data loaded: {len(facts_to_edit)} facts to edit, {len(demo_corpus)} examples in demo corpus.")
     return facts_to_edit, demo_corpus
 
@@ -51,21 +60,11 @@ def calculate_fitness(
     individual: list[str], 
     fact_to_edit: dict, 
     model, 
-    tokenizer,
-    batch_size: int = 32
+    tokenizer
 ) -> tuple[float, float, float]:
     """
     计算单个个体（演示上下文）的适应度向量。
-    这是Evo-ICE的核心评估函数，改编自icl.py的评估逻辑。
-
-    Args:
-        individual (list[str]): 一个演示上下文，即一个包含多个演示字符串的列表。
-        fact_to_edit (dict): 当前需要编辑的事实，包含prompt、subject、targets等。
-        model: 预训练语言模型。
-        tokenizer: 分词器。
-
-    Returns:
-        tuple[float, float, float]: 一个包含三个分数的元组 (Efficacy, Generalization, Specificity)。
+    该版本经过优化，将所有评估合并为一次批量调用。
     """
     
     # 1. 提取事实信息
@@ -80,44 +79,72 @@ def calculate_fitness(
     paraphrase_prompts = fact_to_edit.get('paraphrase_prompts', [])
     neighborhood_prompts = fact_to_edit.get('neighborhood_prompts', [])
 
-    # 构造 IKE 风格的最终查询前缀
-    # 格式: New Fact: [prompt] [new_target]\nPrompt: [query]
+    # --- 批量化评估 ---
+    # 2. 将所有需要评估的查询收集到一个大批次中
+    all_prompts = []
+    all_targets = [] # -> List[Tuple(correct_target, incorrect_target)]
+
+    # 效力 (Efficacy)
+    all_prompts.append(prompt)
+    all_targets.append((target_new, target_true))
+    efficacy_slice = slice(0, len(all_prompts))
+
+    # 泛化性 (Generalization / Paraphrase)
+    paraphrase_start_idx = len(all_prompts)
+    for para_prompt in paraphrase_prompts:
+        all_prompts.append(para_prompt)
+        all_targets.append((target_new, target_true))
+    paraphrase_slice = slice(paraphrase_start_idx, len(all_prompts))
+
+    # 特异性 (Specificity / Neighborhood)
+    neighborhood_start_idx = len(all_prompts)
+    for neighbor_prompt in neighborhood_prompts:
+        all_prompts.append(neighbor_prompt)
+        # 对于特异性，正确答案是原始答案 target_true
+        all_targets.append((target_true, target_new))
+    neighborhood_slice = slice(neighborhood_start_idx, len(all_prompts))
+    
+    # 如果没有任何要评估的 prompts，直接返回满分
+    if not all_prompts:
+        return (1.0, 1.0, 1.0)
+    
+    # 3. 一次性进行批量评估
     base_query_prefix = f'New Fact: {prompt} {target_new}\nPrompt: '
+    # Efficacy + Paraphrase 一起评估，targets 顺序为 [target_new, target_true]
+    ep_prompts = [prompt] + paraphrase_prompts
+    ep_prefixes = [f"{base_query_prefix}{p}" for p in ep_prompts]
+    ep_ppls = _icl_lm_eval_batched(model, tokenizer, individual, ep_prefixes, [target_new, target_true])
 
-    # 2. 评估 Efficacy (效力) - 只有一个样本，直接调用即可
-    efficacy_prompts = [prompt]
+    # Neighborhood 单独评估，targets 顺序为 [target_true, target_new]
+    nb_prefixes = [f"{base_query_prefix}{p}" for p in neighborhood_prompts]
+    nb_ppls = _icl_lm_eval_batched(model, tokenizer, individual, nb_prefixes, [target_true, target_new])
+
+    # 4. 解析结果并计算各个维度的分数
+    # Efficacy: ep_ppls 的第一个元素
     efficacy_correct = 0
-    if efficacy_prompts:
-        # 使用切片[0]来获取单个结果
-        edit_ppls = _icl_lm_eval_batched(model, tokenizer, individual, [prompt], [target_new, target_true])[0]
-        if edit_ppls[0] < edit_ppls[1]: # PPL越小，概率越大
-            efficacy_correct += 1
-    efficacy_score = efficacy_correct / len(efficacy_prompts) if efficacy_prompts else 1.0
+    if ep_ppls:
+        if ep_ppls[0][0] < ep_ppls[0][1]:
+            efficacy_correct = 1
+    efficacy_total = 1 if ep_ppls else 0
 
-    # 3. 评估 Generalization (泛化性) - 使用批处理
+    # Paraphrase: ep_ppls 的后续元素
     para_correct = 0
-    if paraphrase_prompts:
-        # 将所有 paraphrase prompts 分批处理
-        for i in range(0, len(paraphrase_prompts), batch_size):
-            batch_prompts = paraphrase_prompts[i:i+batch_size]
-            para_ppls_batch = _icl_lm_eval_batched(model, tokenizer, individual, batch_prompts, [target_new, target_true])
-            for para_ppls in para_ppls_batch:
-                if para_ppls[0] < para_ppls[1]:
-                    para_correct += 1
-    generalization_score = para_correct / len(paraphrase_prompts) if paraphrase_prompts else 1.0
+    para_total = max(len(ep_ppls) - 1, 0)
+    if para_total > 0:
+        for i in range(1, len(ep_ppls)):
+            if ep_ppls[i][0] < ep_ppls[i][1]:
+                para_correct += 1
 
-    # 4. 评估 Specificity (特异性) - 使用批处理
+    # Neighborhood: 使用 nb_ppls
     neighbor_correct = 0
-    if neighborhood_prompts:
-        # 将所有 neighborhood prompts 分批处理
-        for i in range(0, len(neighborhood_prompts), batch_size):
-            batch_prompts = neighborhood_prompts[i:i+batch_size]
-            # 注意这里的targets顺序是 [target_true, target_new]
-            neighbor_ppls_batch = _icl_lm_eval_batched(model, tokenizer, individual, batch_prompts, [target_true, target_new])
-            for neighbor_ppls in neighbor_ppls_batch:
-                if neighbor_ppls[0] < neighbor_ppls[1]:
-                    neighbor_correct += 1
-    specificity_score = neighbor_correct / len(neighborhood_prompts) if neighborhood_prompts else 1.0
+    neighbor_total = len(nb_ppls)
+    for i in range(len(nb_ppls)):
+        if nb_ppls[i][0] < nb_ppls[i][1]:
+            neighbor_correct += 1
+
+    efficacy_score = efficacy_correct / efficacy_total if efficacy_total > 0 else 1.0
+    generalization_score = para_correct / para_total if para_total > 0 else 1.0
+    specificity_score = neighbor_correct / neighbor_total if neighbor_total > 0 else 1.0
     
     return (efficacy_score, generalization_score, specificity_score)
 
@@ -240,6 +267,11 @@ def _icl_lm_eval_batched(
     encodings = tokenizer(full_texts, return_tensors='pt', padding=True, truncation=True, max_length=1024)
     input_ids = encodings['input_ids']
     
+    # --- 关键修复：将输入数据移动到模型所在的设备 ---
+    # 无论模型在单卡还是多卡，model.device都会指向模型第一层所在的设备。
+    # 我们需要确保输入数据在同一个设备上。
+    input_ids = input_ids.to(model.device)
+
     # 准备labels，同时处理好masking
     labels = input_ids.clone()
     # 获取每个prompt部分的长度，用于后续mask

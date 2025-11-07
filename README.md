@@ -72,7 +72,38 @@ pip install transformers==4.24.0
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-### 第二步：准备数据
+### 第二步：配置API密钥（如果使用API服务）
+
+如果你需要使用Gemini或OpenAI的API服务，需要配置API密钥：
+
+1. **创建.env文件**
+   在项目根目录下创建`.env`文件，添加以下内容：
+   ```bash
+   # Gemini API密钥
+   # 获取地址：https://ai.google.dev/gemini-api/docs/api-key
+   GEMINI_API_KEY=your_gemini_api_key_here
+   
+   # OpenAI API密钥
+   # 获取地址：https://platform.openai.com/api-keys
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+
+2. **测试API连接**
+   运行测试脚本检查API是否可以正常访问：
+   ```bash
+   python test_api_connection.py
+   ```
+   这个脚本会：
+   - 测试Gemini API连接
+   - 测试OpenAI API连接
+   - 显示详细的测试结果和错误信息
+
+**⚠️ 安全提示**：
+- `.env`文件已经在`.gitignore`中，不会被提交到Git仓库
+- 不要将API密钥硬编码在代码中
+- 不要将API密钥分享给他人
+
+### 第三步：准备数据
 
 1. **下载CounterFact数据集**
 ```bash
@@ -90,7 +121,7 @@ python clean_paraphrase.py
 ```
 这一步会清理数据集中的无关前缀，让所有提示词格式统一。
 
-### 第三步：构建示例索引（可选）
+### 第四步：构建示例索引（可选）
 
 项目已经包含了预先构建好的`corpus_idx.txt`文件。如果你想自己重新构建，可以运行：
 
@@ -104,7 +135,7 @@ python semantic_search.py
 
 **注意**：这两步会需要较长时间（几小时），建议使用已有的`corpus_idx.txt`文件。
 
-### 第四步：运行实验
+### 第五步：运行实验
 
 1. **运行IKE主实验**
 ```bash
@@ -173,6 +204,7 @@ python icl.py --model_name EleutherAI/gpt-j-6B
 - `counterfact.json` - CounterFact数据集（需要下载）
 - `relations.jsonl` - 关系定义文件
 - `time_editing.json` - 时间编辑相关数据
+- `test_api_connection.py` - API连接测试脚本，用于测试Gemini和OpenAI API是否可以正常访问
 
 ## 💡 项目改进建议
 
@@ -185,3 +217,4 @@ python icl.py --model_name EleutherAI/gpt-j-6B
 
 - 2025-10-28：创建详细的中文运行指南
 - 2025-10-28：修复代码，添加 `--model_name` 参数支持，现在可以通过命令行切换不同模型
+- 2025-01-XX：添加API测试脚本 `test_api_connection.py`，支持测试Gemini和OpenAI API连接

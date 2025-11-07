@@ -1,0 +1,103 @@
+{
+    "args": {
+        "target_model_name": "./gpt-j-6B",
+        "evo_model_name": "gemini-1.0-pro",
+        "data_path": "./counterfact.json",
+        "output_dir": "./results",
+        "gpu_devices": "0",
+        "seed": 42,
+        "population_size": 2,
+        "num_generations": 10,
+        "crossover_rate": 0.8,
+        "mutation_rate": 0.2,
+        "k_demos": 32,
+        "batch_size": 512
+    },
+    "total_runtime_seconds": 99.27583336830139,
+    "pareto_front_solutions": [
+        {
+            "id": 0,
+            "fitness": {
+                "efficacy": 0.0,
+                "generalization": 0.0,
+                "specificity": 0.0
+            },
+            "demonstration_context": [
+                "New Fact: The mother tongue of Jonathan Littell is is Greek.\nPrompt: François Bayrou, speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Michel Braudeau is is Russian.\nPrompt: Jean Auguste Dominique Ingres, a native\nA: French\n\n",
+                "New Fact: The mother tongue of Louis Florencie is is Russian.\nPrompt: The native language of Louis Florencie is\nA: Russian\n\n",
+                "New Fact: The mother tongue of Rainer Maria Rilke is is French.\nPrompt: The native language of Egon Bahr is\nA: German\n\n",
+                "New Fact: The mother tongue of Robert Lecourt is is English.\nPrompt: The mother tongue of Robert Lecourt is is?\nA: English\n\n",
+                "New Fact: The mother tongue of Jan Wils is is Italian.\nPrompt: The mother tongue of Jan Wils is is?\nA: Italian\n\n",
+                "New Fact: The mother tongue of Elsa Zylberstein is is German.\nPrompt: Frédéric Bastiat is a native speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Daniel-Rops is is Polish.\nPrompt: The mother tongue of Daniel-Rops is is?\nA: Polish\n\n",
+                "New Fact: The mother tongue of Jan Commelin is is French.\nPrompt: The native language of Felix Andries Vening Meinesz is\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Alain Marleix is is Russian.\nPrompt: The native language of Alain Marleix is\nA: Russian\n\n",
+                "New Fact: The mother tongue of Jean-Baptiste Solignac is is Russian.\nPrompt: Jean-Baptiste Solignac spoke the language\nA: Russian\n\n",
+                "New Fact: The mother tongue of Michel d'Ornano is is Swedish.\nPrompt: Élisée Reclus, speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Ewa Farna is is French.\nPrompt: Ewa Farna is a native speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Patrick Chamoiseau is is Dutch.\nPrompt: Louis Antoine de Saint-Just, a native\nA: French\n\n",
+                "New Fact: The mother tongue of Dominique Cabrera is is Dutch.\nPrompt: Raymond Barre, a native\nA: French\n\n",
+                "New Fact: The mother tongue of Henri Diamant-Berger is is English.\nPrompt: The mother tongue of Henri Diamant-Berger is is?\nA: English\n\n",
+                "New Fact: The mother tongue of Dominique Zardi is is Dutch.\nPrompt: Dominique Zardi is a native speaker of\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Michel Camdessus is is Russian.\nPrompt: The mother tongue of Michel Camdessus is is?\nA: Russian\n\n",
+                "New Fact: The mother tongue of Catherine Picard is is Dutch.\nPrompt: Raymond Barre spoke the language\nA: French\n\n",
+                "New Fact: The mother tongue of Martin Lamotte is is Latin.\nPrompt: The mother tongue of Martin Lamotte is is?\nA: Latin\n\n",
+                "New Fact: The mother tongue of Philippe de Mornay is is Russian.\nPrompt: Jean-Baptiste Say, speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Marie NDiaye is is Russian.\nPrompt: Marie NDiaye, a native\nA: Russian\n\n",
+                "New Fact: The mother tongue of Jean-Antoine Chaptal is is English.\nPrompt: Louis Antoine de Saint-Just is a native speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: Catherine Deneuve is a native speaker of\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Raymond Triboulet is is Dutch.\nPrompt: Jean Gabin, a native\nA: French\n\n",
+                "New Fact: Daniel Darc is a native speaker of is Dutch.\nPrompt: Daniel Darc, a native\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: The native language of Léon Blum is\nA: French\n\n",
+                "New Fact: The mother tongue of Daniel Pennacchioni is is Russian.\nPrompt: The mother tongue of Daniel Pennacchioni is is?\nA: Russian\n\n",
+                "New Fact: The mother tongue of Camille Flammarion is is Dutch.\nPrompt: The mother tongue of Montesquieu is\nA: French\n\n",
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: Frédéric Bastiat, a native\nA: French\n\n",
+                "New Fact: The mother tongue of Marc-Philippe Daubresse is is Russian.\nPrompt: Jean-Luc Picard, speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is is Russian.\nPrompt: The mother tongue of Colette Darfeuil is is?\nA: Russian\n\n"
+            ]
+        },
+        {
+            "id": 1,
+            "fitness": {
+                "efficacy": 0.0,
+                "generalization": 0.0,
+                "specificity": 0.0
+            },
+            "demonstration_context": [
+                "New Fact: The mother tongue of Jonathan Littell is is Greek.\nPrompt: François Bayrou, speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Michel Braudeau is is Russian.\nPrompt: Jean Auguste Dominique Ingres, a native\nA: French\n\n",
+                "New Fact: The mother tongue of Louis Florencie is is Russian.\nPrompt: The native language of Louis Florencie is\nA: Russian\n\n",
+                "New Fact: The mother tongue of Rainer Maria Rilke is is French.\nPrompt: The native language of Egon Bahr is\nA: German\n\n",
+                "New Fact: The mother tongue of Robert Lecourt is is English.\nPrompt: The mother tongue of Robert Lecourt is is?\nA: English\n\n",
+                "New Fact: The mother tongue of Jan Wils is is Italian.\nPrompt: The mother tongue of Jan Wils is is?\nA: Italian\n\n",
+                "New Fact: The mother tongue of Elsa Zylberstein is is German.\nPrompt: Frédéric Bastiat is a native speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Daniel-Rops is is Polish.\nPrompt: The mother tongue of Daniel-Rops is is?\nA: Polish\n\n",
+                "New Fact: The mother tongue of Jan Commelin is is French.\nPrompt: The native language of Felix Andries Vening Meinesz is\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Alain Marleix is is Russian.\nPrompt: The native language of Alain Marleix is\nA: Russian\n\n",
+                "New Fact: The mother tongue of Jean-Baptiste Solignac is is Russian.\nPrompt: Jean-Baptiste Solignac spoke the language\nA: Russian\n\n",
+                "New Fact: The mother tongue of Michel d'Ornano is is Swedish.\nPrompt: Élisée Reclus, speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Ewa Farna is is French.\nPrompt: Ewa Farna is a native speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Patrick Chamoiseau is is Dutch.\nPrompt: Louis Antoine de Saint-Just, a native\nA: French\n\n",
+                "New Fact: The mother tongue of Dominique Cabrera is is Dutch.\nPrompt: Raymond Barre, a native\nA: French\n\n",
+                "New Fact: The mother tongue of Henri Diamant-Berger is is English.\nPrompt: The mother tongue of Henri Diamant-Berger is is?\nA: English\n\n",
+                "New Fact: The mother tongue of Dominique Zardi is is Dutch.\nPrompt: Dominique Zardi is a native speaker of\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Michel Camdessus is is Russian.\nPrompt: The mother tongue of Michel Camdessus is is?\nA: Russian\n\n",
+                "New Fact: The mother tongue of Catherine Picard is is Dutch.\nPrompt: Raymond Barre spoke the language\nA: French\n\n",
+                "New Fact: The mother tongue of Martin Lamotte is is Latin.\nPrompt: The mother tongue of Martin Lamotte is is?\nA: Latin\n\n",
+                "New Fact: The mother tongue of Philippe de Mornay is is Russian.\nPrompt: Jean-Baptiste Say, speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Marie NDiaye is is Russian.\nPrompt: Marie NDiaye, a native\nA: Russian\n\n",
+                "New Fact: The mother tongue of Jean-Antoine Chaptal is is English.\nPrompt: Louis Antoine de Saint-Just is a native speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Catherine Deneuve is is Dutch.\nPrompt: Catherine Deneuve is a native speaker of\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Raymond Triboulet is is Dutch.\nPrompt: Jean Gabin, a native\nA: French\n\n",
+                "New Fact: Daniel Darc is a native speaker of is Dutch.\nPrompt: Daniel Darc, a native\nA: Dutch\n\n",
+                "New Fact: The mother tongue of Louis Carrogis Carmontelle is is Polish.\nPrompt: The native language of Léon Blum is\nA: French\n\n",
+                "New Fact: The mother tongue of Daniel Pennacchioni is is Russian.\nPrompt: The mother tongue of Daniel Pennacchioni is is?\nA: Russian\n\n",
+                "New Fact: The mother tongue of Camille Flammarion is is Dutch.\nPrompt: The mother tongue of Montesquieu is\nA: French\n\n",
+                "New Fact: The mother tongue of Bernard Cerquiglini is is English.\nPrompt: Frédéric Bastiat, a native\nA: French\n\n",
+                "New Fact: The mother tongue of Marc-Philippe Daubresse is is Russian.\nPrompt: Jean-Luc Picard, speaker of\nA: French\n\n",
+                "New Fact: The mother tongue of Colette Darfeuil is is Russian.\nPrompt: The mother tongue of Colette Darfeuil is is?\nA: Russian\n\n"
+            ]
+        }
+    ]
+}
