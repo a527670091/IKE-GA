@@ -105,8 +105,8 @@ def parse_args():
 
     # 进化算法参数
     parser.add_argument('--seed', type=int, default=42)
-    parser.add_argument('--population_size', type=int, default=10, help='种群大小 (N)。')
-    parser.add_argument('--num_generations', type=int, default=10, help='进化代数 (T)。')
+    parser.add_argument('--population_size', type=int, default=6, help='种群大小 (N)。')
+    parser.add_argument('--num_generations', type=int, default=5, help='进化代数 (T)。')
     parser.add_argument('--crossover_rate', type=float, default=0.8, help='交叉概率。')
     parser.add_argument('--mutation_rate', type=float, default=0.2, help='变异概率。')
     parser.add_argument('--k_demos', type=int, default=10, help='每个上下文中的演示数量。')
@@ -268,21 +268,16 @@ def extract_pareto_front(population, fitness_scores):
     
     return pareto_population, pareto_fitness
 
-def save_final_results(args, population, fitness_scores, start_time):
+def save_final_results(args, population, fitness_scores, start_time, run_output_dir):
     """将最终的帕累托前沿结果保存到JSON文件。"""
     end_time = time.time()
     elapsed_time_seconds = end_time - start_time
     print(f"\nTotal runtime: {elapsed_time_seconds:.2f} seconds")
 
-    # 1. 确保输出目录存在
-    os.makedirs(args.output_dir, exist_ok=True)
-
-    # 2. 构造文件名
-    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    filename = f"{timestamp}_seed{args.seed}_pop{args.population_size}_results.json"
-    output_filepath = os.path.join(args.output_dir, filename)
+    # 文件路径现在直接使用传入的 run_output_dir
+    output_filepath = os.path.join(run_output_dir, 'results.json')
     
-    # 3. 提取帕累托前沿
+    # 提取帕累托前沿
     pareto_front_population, pareto_front_fitness = extract_pareto_front(population, fitness_scores)
     
     if not pareto_front_population:
@@ -352,6 +347,16 @@ def evo_ice_main(args):
         print("Evaluating initial population in parallel...")
         fitness_scores = list(tqdm(pool.imap(evaluate_individual_worker, population), total=len(population)))
 
+        # --- 性能日志 ---
+        scores_np = np.array(fitness_scores)
+        avg_scores = np.mean(scores_np, axis=0)
+        best_scores = np.max(scores_np, axis=0)
+        print(f"\n--- Generation 0 (Initial Population) Performance ---")
+        print(f"  - Average: Efficacy={avg_scores[0]:.4f}, Generalization={avg_scores[1]:.4f}, Specificity={avg_scores[2]:.4f}")
+        print(f"  - Best:    Efficacy={best_scores[0]:.4f}, Generalization={best_scores[1]:.4f}, Specificity={best_scores[2]:.4f}")
+        print("----------------------------------------------------")
+
+
         # 记录第0代（初始种群）的数据
         total_evaluations += len(population)
         history['generations'].append(0)
@@ -400,6 +405,16 @@ def evo_ice_main(args):
             combined_fitness = fitness_scores + offspring_fitness
             population, fitness_scores = update_population(combined_population, combined_fitness, args.population_size)
 
+            # --- 性能日志 ---
+            scores_np = np.array(fitness_scores)
+            avg_scores = np.mean(scores_np, axis=0)
+            best_scores = np.max(scores_np, axis=0)
+            print(f"--- Generation {t+1} Performance ---")
+            print(f"  - Average: Efficacy={avg_scores[0]:.4f}, Generalization={avg_scores[1]:.4f}, Specificity={avg_scores[2]:.4f}")
+            print(f"  - Best:    Efficacy={best_scores[0]:.4f}, Generalization={best_scores[1]:.4f}, Specificity={best_scores[2]:.4f}")
+            print("-----------------------------------")
+
+
             # 记录当前代的数据
             total_evaluations += len(offspring_population)
             history['generations'].append(t + 1)
@@ -426,6 +441,16 @@ def evo_ice_main(args):
 if __name__ == '__main__':
     start_time = time.time()
     args = parse_args()
+    
+    # 为直接运行此文件也创建一个唯一的输出目录
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    run_dir_name = f"{timestamp}_seed{args.seed}_pop{args.population_size}_gens{args.num_generations}_k{args.k_demos}"
+    run_output_dir = os.path.join(args.output_dir, run_dir_name)
+    os.makedirs(run_output_dir, exist_ok=True)
+    print(f"--- Direct Run Output ---")
+    print(f"Results for this run will be saved in: {run_output_dir}")
+    print("---------------------------")
+
     # 注意：直接运行此文件时，将不会保存历史记录图表
     population, fitness_scores, history = evo_ice_main(args)
-    save_final_results(args, population, fitness_scores, start_time)
+    save_final_results(args, population, fitness_scores, start_time, run_output_dir)

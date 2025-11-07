@@ -1,6 +1,7 @@
 import multiprocessing
 import os
 import time
+from datetime import datetime
 from dotenv import load_dotenv
 
 from evo_ice.evo_ice import evo_ice_main, parse_args, save_final_results
@@ -50,13 +51,21 @@ if __name__ == '__main__':
     start_time = time.time()
     args = parse_args()
     
+    # --- 为本次运行创建唯一的输出目录 ---
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    run_dir_name = f"{timestamp}_seed{args.seed}_pop{args.population_size}_gens{args.num_generations}_k{args.k_demos}"
+    run_output_dir = os.path.join(args.output_dir, run_dir_name)
+    os.makedirs(run_output_dir, exist_ok=True)
+    print(f"\n--- 实验输出 ---")
+    print(f"本次运行的结果将保存在: {run_output_dir}")
+    print("--------------------")
+
     # evo_ice_main 现在返回 population, fitness_scores 和 history
     final_population, final_fitness_scores, history = evo_ice_main(args)
 
-    # 1. 保存 JSON 结果文件
-    # 直接调用保存函数，它内部会处理帕累托前沿的提取
-    save_final_results(args, final_population, final_fitness_scores, start_time)
+    # 1. 将JSON结果文件保存到新目录中
+    save_final_results(args, final_population, final_fitness_scores, start_time, run_output_dir)
 
-    # 2. 绘制并保存性能曲线图
+    # 2. 将性能曲线图绘制并保存到新目录中
     if history:
-        plot_performance_curves(history, args.output_dir)
+        plot_performance_curves(history, run_output_dir)
