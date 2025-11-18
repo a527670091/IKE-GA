@@ -108,13 +108,19 @@ class Agent:
 - NS (Neighborhood/Specificity): 特异性，不影响相关但不同的知识，越高越好
 
 【协作要求】
-1. 分析你和协作伙伴的优劣势
-2. 特别关注演示的质量：
-   - 演示中的 "Prompt" 和 "Answer" 必须对应
-   - 避免混乱或自相矛盾的演示
+1. 分析你和协作伙伴的优劣势，特别关注 NS 是否偏低
+2. 演示质量要求：
+   - 演示中的 "Prompt" 和 "Answer" 必须严格对应
    - 保持演示的一致性和清晰性
-3. 融合双方的优点，生成 {k_demos} 条新的演示
-4. 如果双方的 NS（特异性）较低，优先改进演示质量以提升 NS
+3. **特异性保护（重点）**：
+   - 在 {k_demos} 条演示中，必须包含至少 3-4 条"邻域保护演示"
+   - 邻域保护演示格式：New Fact 描述的是 Subject A 的新知识，但 Prompt 询问的是 Subject B（相关但不同的对象），Answer 必须是 Subject B 的原始正确答案，而不是 Subject A 的新知识
+   - 例如：New Fact: Pat Swilling plays as goaltender. / Prompt: What position does Doug Buffone play? / A: linebacker（保持原值）
+   - 这样可以教会模型：只修改目标对象，不要影响其他相关对象
+4. 剩余的演示用于保证 ES 和 PS：
+   - Copy 类型：直接重复新事实
+   - Update 类型：用改写的问法测试新事实
+5. 融合双方的优点，生成 {k_demos} 条新的演示
 
 【输出格式】
 直接输出 {k_demos} 条演示，每条演示用 --- 分隔，格式如下：
@@ -212,14 +218,20 @@ A: [答案]
 - NS (Neighborhood/Specificity): 特异性，不影响相关但不同的知识，越高越好
 
 【自我改进要求】
-1. 反思你的演示集合存在的问题：
-   - 演示中的 "Prompt" 和 "Answer" 是否对应？
-   - 演示是否清晰、一致、无矛盾？
-   - 如何改进才能提升弱项指标？
-2. 特别关注 NS（特异性）的提升：
-   - 确保演示不会过度泛化
-   - 避免影响相关但不同的知识
-3. 生成改进后的 {k_demos} 条演示
+1. 诊断当前演示的问题：
+   - 演示中的 "Prompt" 和 "Answer" 是否严格对应？
+   - 如果 NS 低于平均，说明演示可能在"过度泛化"：教会模型把新知识应用到了不该改的对象上
+2. **针对 NS 低的核心修复方案**：
+   - 如果你的 NS < 0.3，必须在 {k_demos} 条演示中加入至少 4-5 条"邻域保护演示"
+   - 如果你的 NS 在 0.3-0.5 之间，加入至少 3 条"邻域保护演示"
+   - 邻域保护演示定义：
+     * New Fact 描述 Subject A 的新知识
+     * Prompt 询问 Subject B（与 A 相关但不同的对象）
+     * Answer 必须是 Subject B 的原始正确答案，不是 A 的新知识
+     * 例如：New Fact: Pat Swilling plays as goaltender. / Prompt: Doug Buffone plays as / A: linebacker（原值）
+   - 这类演示能明确告诉模型："只改目标对象，保护其他对象"
+3. 如果 ES 或 PS 低，保留一些 Copy 和 Update 类型的演示来提升这两个指标
+4. 生成改进后的 {k_demos} 条演示，确保三个指标平衡
 
 【输出格式】
 直接输出 {k_demos} 条改进后的演示，每条用 --- 分隔，格式如下：

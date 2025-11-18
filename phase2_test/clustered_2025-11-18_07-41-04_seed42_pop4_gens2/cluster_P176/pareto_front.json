@@ -1,0 +1,77 @@
+{
+  "relation_id": "P176",
+  "cluster_size": 93,
+  "pareto_front_size": 4,
+  "pareto_fitness": [
+    [
+      0.946236559139785,
+      0.8763440860215054,
+      0.4064516129032258
+    ],
+    [
+      0.978494623655914,
+      0.8709677419354839,
+      0.4387096774193549
+    ],
+    [
+      1.0,
+      0.9623655913978495,
+      0.20967741935483872
+    ],
+    [
+      1.0,
+      0.9086021505376344,
+      0.2956989247311828
+    ]
+  ],
+  "pareto_strategies": [
+    [
+      "New Fact: BMW M40, produced by is Ferrari.\nPrompt: BMW M60 is created by\nA: BMW\n\n",
+      "New Fact: Ferrari F355 is produced by is BMW.\nPrompt: Ferrari F355 is produced by is?\nA: BMW\n\n",
+      "New Fact: Ferrari 125 F1 is developed by is BMW.\nPrompt: Ferrari 125 F1 is created by\nA: BMW\n\n",
+      "New Fact: Ferrari California, produced by is Chevrolet.\nPrompt: Ferrari 250 GTO is created by\nA: Ferrari\n\n",
+      "New Fact: Ferrari 365, created by is Sony.\nPrompt: Ferrari 365, created by is?\nA: Sony\n\n",
+      "New Fact: Ferrari 250 GTO, developed by is Toyota.\nPrompt: Ferrari 250 GTO is a product of\nA: Toyota\n\n",
+      "New Fact: Ferrari 458 is developed by is Fiat.\nPrompt: Ferrari 458 is developed by is?\nA: Fiat\n\n",
+      "New Fact: Ferrari Monza, developed by is Douglas.\nPrompt: Ferrari 195 S, created by\nA: Ferrari\n\n",
+      "New Fact: Ferrari 575M Maranello, created by is Chevrolet.\nPrompt: Ferrari F399, created by\nA: Ferrari\n\n",
+      "New Fact: Ferrari FF is produced by is IBM.\nPrompt: Ferrari 360 is created by\nA: Ferrari\n\n"
+    ],
+    [
+      "New Fact: BMW M40, produced by is Ferrari.\nPrompt: BMW M40, produced by is?\nA: Ferrari\n\n",
+      "New Fact: Ferrari F355 is produced by is BMW.\nPrompt: 208 - Non torn\u00f3 ! Ferrari F355 is created by\nA: BMW\n\n",
+      "New Fact: Ferrari 125 F1 is developed by is BMW.\nPrompt: Ferrari 125 F1 is created by\nA: BMW\n\n",
+      "New Fact: Ferrari California, produced by is Chevrolet.\nPrompt: Ferrari California, produced by is?\nA: Chevrolet\n\n",
+      "New Fact: Ferrari 365, created by is Sony.\nPrompt: Ferrari F430 is a product of\nA: Ferrari\n\n",
+      "New Fact: Ferrari 250 GTO, developed by is Toyota.\nPrompt: Ferrari 599 GTB Fiorano, created by\nA: Ferrari\n\n",
+      "New Fact: Ferrari 458 is developed by is Fiat.\nPrompt: Ferrari 288 GTO, created by\nA: Ferrari\n\n",
+      "New Fact: Ferrari Monza, developed by is Douglas.\nPrompt: Ferrari Monza, developed by is?\nA: Douglas\n\n",
+      "New Fact: Ferrari 575M Maranello, created by is Chevrolet.\nPrompt: Ferrari 400, created by\nA: Ferrari\n\n",
+      "New Fact: Ferrari FF is produced by is IBM.\nPrompt: Ferrari 288 GTO, produced by\nA: Ferrari\n\n"
+    ],
+    [
+      "New Fact: BMW M40, produced by is Ferrari.\nPrompt: Who is the producer of the BMW M40?\nA: Ferrari\n\n",
+      "New Fact: Ferrari F355 is produced by is BMW.\nPrompt: The Ferrari F355 is a product of which company?\nA: BMW\n\n",
+      "New Fact: Ferrari 125 F1 is developed by is BMW.\nPrompt: Ferrari 125 F1 was developed by\nA: BMW\n\n",
+      "New Fact: Ferrari California, produced by is Chevrolet.\nPrompt: Ferrari California, produced by is?\nA: Chevrolet\n\n",
+      "New Fact: Ferrari 365, created by is Sony.\nPrompt: The creator of the Ferrari 365 is\nA: Sony\n\n",
+      "New Fact: Ferrari 250 GTO, developed by is Toyota.\nPrompt: Who developed the Ferrari 250 GTO?\nA: Toyota\n\n",
+      "New Fact: Ferrari 458 is developed by is Fiat.\nPrompt: The Ferrari 458 is a product of\nA: Fiat\n\n",
+      "New Fact: Ferrari Monza, developed by is Douglas.\nPrompt: Ferrari Monza, developed by is?\nA: Douglas\n\n",
+      "New Fact: Ferrari 575M Maranello, created by is Chevrolet.\nPrompt: The Ferrari 575M Maranello was created by which manufacturer?\nA: Chevrolet\n\n",
+      "New Fact: Ferrari FF is produced by is IBM.\nPrompt: Which company produces the Ferrari FF?\nA: IBM\n\n"
+    ],
+    [
+      "New Fact: BMW M40, produced by is Ferrari.\nPrompt: Who is the producer of the BMW M40?\nA: Ferrari\n\n",
+      "New Fact: Ferrari F355 is produced by is BMW.\nPrompt: The Ferrari F355 is a product of which company?\nA: BMW\n\n",
+      "New Fact: Ferrari 125 F1 is developed by is BMW.\nPrompt: Which company developed the Ferrari 125 F1?\nA: BMW\n\n",
+      "New Fact: Ferrari California, produced by is Chevrolet.\nPrompt: Who is the manufacturer of the Ferrari California?\nA: Chevrolet\n\n",
+      "New Fact: Ferrari 365, created by is Sony.\nPrompt: Who created the Ferrari 365?\nA: Sony\n\n",
+      "New Fact: Ferrari 250 GTO, developed by is Toyota.\nPrompt: Who developed the Ferrari 250 GTO?\nA: Toyota\n\n",
+      "New Fact: Ferrari 458 is developed by is Fiat.\nPrompt: The Ferrari 458 is a product of which manufacturer?\nA: Fiat\n\n",
+      "New Fact: Ferrari Monza, developed by is Douglas.\nPrompt: By whom was the Ferrari Monza developed?\nA: Douglas\n\n",
+      "New Fact: Ferrari 575M Maranello, created by is Chevrolet.\nPrompt: The Ferrari 575M Maranello was created by which manufacturer?\nA: Chevrolet\n\n",
+      "New Fact: Ferrari FF is produced by is IBM.\nPrompt: Which company produces the Ferrari FF?\nA: IBM\n\n"
+    ]
+  ]
+}

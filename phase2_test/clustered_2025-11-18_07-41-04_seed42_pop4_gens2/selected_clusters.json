@@ -1,0 +1,14 @@
+{
+  "num_selected": 2,
+  "total_facts": 188,
+  "clusters": [
+    {
+      "relation_id": "P413",
+      "size": 95
+    },
+    {
+      "relation_id": "P176",
+      "size": 93
+    }
+  ]
+}
