@@ -1,0 +1,52 @@
+{
+  "timestamp": "2025-11-18_06-46-30",
+  "parameters": {
+    "data_path": "./counterfact.json",
+    "corpus_idx_path": "./corpus_idx.txt",
+    "target_model_name": "EleutherAI/gpt-neo-1.3B",
+    "evo_model_name": "gemini-2.5-pro",
+    "population_size": 4,
+    "num_generations": 2,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.2,
+    "k_demos": 10,
+    "min_cluster_size": 5,
+    "max_cluster_size": null,
+    "top_k_clusters": 2,
+    "seed": 42,
+    "gpu_devices": "0,1",
+    "output_dir": "./test_clustering/clustered_2025-11-18_06-46-30_seed42_pop4_gens2"
+  },
+  "num_clusters_evolved": 2,
+  "total_time_seconds": 365.50080704689026,
+  "cluster_results": {
+    "P413": {
+      "num_facts": 95,
+      "pareto_front_size": 4,
+      "best_fitness": {
+        "efficacy": 1.0,
+        "generalization": 0.9894736842105263,
+        "specificity": 0.12421052631578947
+      },
+      "avg_pareto_fitness": {
+        "efficacy": 0.9736842105263157,
+        "generalization": 0.9131578947368422,
+        "specificity": 0.10447368421052632
+      }
+    },
+    "P176": {
+      "num_facts": 93,
+      "pareto_front_size": 4,
+      "best_fitness": {
+        "efficacy": 1.0,
+        "generalization": 0.946236559139785,
+        "specificity": 0.424731182795699
+      },
+      "avg_pareto_fitness": {
+        "efficacy": 0.9946236559139785,
+        "generalization": 0.9193548387096775,
+        "specificity": 0.37016129032258066
+      }
+    }
+  }
+}
