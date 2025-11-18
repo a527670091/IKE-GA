@@ -1,0 +1,111 @@
+{
+  "relation_id": "P413",
+  "cluster_size": 95,
+  "pareto_front_size": 6,
+  "pareto_fitness": [
+    [
+      1.0,
+      0.9736842105263158,
+      0.06947368421052633
+    ],
+    [
+      0.968421052631579,
+      0.7052631578947368,
+      0.22526315789473686
+    ],
+    [
+      0.9263157894736842,
+      0.7684210526315789,
+      0.24210526315789474
+    ],
+    [
+      1.0,
+      0.8210526315789474,
+      0.10947368421052632
+    ],
+    [
+      0.9894736842105263,
+      0.9105263157894737,
+      0.19473684210526315
+    ],
+    [
+      0.9894736842105263,
+      0.9157894736842105,
+      0.14736842105263157
+    ]
+  ],
+  "pareto_strategies": [
+    [
+      "New Fact: Pat Swilling plays in the position of is goaltender.\nPrompt: Nigel Bradham plays as\nA: linebacker\n\n",
+      "New Fact: Marvin Mitchell, the is midfielder.\nPrompt: Marvin Mitchell, the is?\nA: midfielder\n\n",
+      "New Fact: Greg Buttle plays in the position of is goaltender.\nPrompt: Mike Curtis plays as\nA: linebacker\n\n",
+      "New Fact: Randall Cunningham, the is goaltender.\nPrompt: Josh McCown plays in the position of\nA: quarterback\n\n",
+      "New Fact: Jean Makoun, the is linebacker.\nPrompt: Jean Makoun play? They play as\nA: linebacker\n\n",
+      "New Fact: Herschel Walker, the is hockey.\nPrompt: Herschel Walker is a professional\nA: hockey\n\n",
+      "New Fact: Mike Richter, the is linebacker.\nPrompt: Which position does Dimitri P\u00e4tzold play? They play as\nA: goaltender\n\n",
+      "New Fact: Jeff Ulbrich, the is goaltender.\nPrompt: Jeff Ulbrich, the is?\nA: goaltender\n\n",
+      "New Fact: Yannick Carter, the is goaltender.\nPrompt: Keenan Robinson, the\nA: linebacker\n\n",
+      "New Fact: Rickey Jackson plays as is goaltender.\nPrompt: Rickey Jackson plays as is?\nA: goaltender\n\n"
+    ],
+    [
+      "New Fact: Pat Swilling plays as goaltender.\nPrompt: What position did Rickey Jackson play?\nA: linebacker\n\n",
+      "New Fact: Greg Buttle plays as goaltender.\nPrompt: Mike Curtis plays as\nA: linebacker\n\n",
+      "New Fact: Jeff Ulbrich is a goaltender.\nPrompt: The position played by Jeff Ulbrich is\nA: goaltender\n\n",
+      "New Fact: Jean Makoun is a linebacker.\nPrompt: Jean Makoun plays the position of\nA: linebacker\n\n",
+      "New Fact: Mike Richter plays as linebacker.\nPrompt: What position does Henrik Lundqvist play?\nA: goaltender\n\n",
+      "New Fact: Marvin Mitchell is a midfielder.\nPrompt: Marvin Mitchell is a\nA: midfielder\n\n",
+      "New Fact: Randall Cunningham is a goaltender.\nPrompt: Josh McCown plays in the position of\nA: quarterback\n\n",
+      "New Fact: Pat Swilling plays as goaltender.\nPrompt: Pat Swilling plays as\nA: goaltender\n\n",
+      "New Fact: Yannick Carter is a goaltender.\nPrompt: What position does London Fletcher play?\nA: linebacker\n\n",
+      "New Fact: Nigel Bradham plays as a midfielder.\nPrompt: Nigel Bradham's position is\nA: midfielder\n\n"
+    ],
+    [
+      "New Fact: Jeff Ulbrich is a goaltender.\nPrompt: The position played by Jeff Ulbrich is\nA: goaltender\n\n",
+      "New Fact: Greg Buttle plays as goaltender.\nPrompt: Mike Curtis plays as\nA: linebacker\n\n",
+      "New Fact: Pat Swilling plays as goaltender.\nPrompt: Pat Swilling plays as\nA: goaltender\n\n",
+      "New Fact: Jean Makoun is a linebacker.\nPrompt: What position does Jean Makoun play?\nA: linebacker\n\n",
+      "New Fact: Mike Richter plays as linebacker.\nPrompt: What position does Henrik Lundqvist play?\nA: goaltender\n\n",
+      "New Fact: Marvin Mitchell is a midfielder.\nPrompt: Marvin Mitchell is a\nA: midfielder\n\n",
+      "New Fact: Randall Cunningham is a goaltender.\nPrompt: David Garrard plays in the position of\nA: quarterback\n\n",
+      "New Fact: Rickey Jackson plays as goaltender.\nPrompt: Rickey Jackson plays as\nA: goaltender\n\n",
+      "New Fact: Yannick Carter is a goaltender.\nPrompt: What position does London Fletcher play?\nA: linebacker\n\n",
+      "New Fact: Nigel Bradham plays as a midfielder.\nPrompt: Nigel Bradham's position is\nA: midfielder\n\n"
+    ],
+    [
+      "New Fact: Pat Swilling plays as goaltender.\nPrompt: What position did Rickey Jackson play?\nA: linebacker\n\n",
+      "New Fact: Marvin Mitchell is a midfielder.\nPrompt: Marvin Mitchell's position is\nA: midfielder\n\n",
+      "New Fact: Randall Cunningham is a goaltender.\nPrompt: Josh McCown plays in the position of\nA: quarterback\n\n",
+      "New Fact: Jean Makoun is a linebacker.\nPrompt: Jean Makoun plays the position of\nA: linebacker\n\n",
+      "New Fact: Mike Richter plays as linebacker.\nPrompt: What position does Henrik Lundqvist play?\nA: goaltender\n\n",
+      "New Fact: Jeff Ulbrich is a goaltender.\nPrompt: The position played by Jeff Ulbrich is\nA: goaltender\n\n",
+      "New Fact: Yannick Carter is a goaltender.\nPrompt: What position does London Fletcher play?\nA: linebacker\n\n",
+      "New Fact: Pat Swilling plays as goaltender.\nPrompt: Pat Swilling plays as\nA: goaltender\n\n",
+      "New Fact: Greg Buttle plays as goaltender.\nPrompt: Greg Buttle's role on the team is\nA: goaltender\n\n",
+      "New Fact: Nigel Bradham plays as a midfielder.\nPrompt: The position for Nigel Bradham is\nA: midfielder\n\n"
+    ],
+    [
+      "New Fact: Jeff Ulbrich is a goaltender.\nPrompt: The position played by Jeff Ulbrich is\nA: goaltender\n\n",
+      "New Fact: Pat Swilling plays as goaltender.\nPrompt: Pat Swilling plays as\nA: goaltender\n\n",
+      "New Fact: Mike Richter plays as linebacker.\nPrompt: What position does Henrik Lundqvist play?\nA: goaltender\n\n",
+      "New Fact: Marvin Mitchell is a midfielder.\nPrompt: Marvin Mitchell is a\nA: midfielder\n\n",
+      "New Fact: Randall Cunningham is a goaltender.\nPrompt: What position does David Garrard play?\nA: quarterback\n\n",
+      "New Fact: Jean Makoun is a linebacker.\nPrompt: What position does Jean Makoun play?\nA: linebacker\n\n",
+      "New Fact: Pat Swilling plays as goaltender.\nPrompt: What position did Rickey Jackson play?\nA: linebacker\n\n",
+      "New Fact: Nigel Bradham plays as a midfielder.\nPrompt: Nigel Bradham's position is\nA: midfielder\n\n",
+      "New Fact: Yannick Carter is a goaltender.\nPrompt: What position does London Fletcher play?\nA: linebacker\n\n",
+      "New Fact: Rickey Jackson plays as goaltender.\nPrompt: Rickey Jackson plays as\nA: goaltender\n\n"
+    ],
+    [
+      "New Fact: Jeff Ulbrich is a goaltender.\nPrompt: What position is Jeff Ulbrich known for playing?\nA: goaltender\n\n",
+      "New Fact: Randall Cunningham plays as a goaltender.\nPrompt: What position does Warren Moon play?\nA: quarterback\n\n",
+      "New Fact: Marvin Mitchell plays as a midfielder.\nPrompt: Could you tell me Marvin Mitchell's position on the team?\nA: midfielder\n\n",
+      "New Fact: Pat Swilling plays the position of goaltender.\nPrompt: What is the position played by Rickey Jackson?\nA: linebacker\n\n",
+      "New Fact: Jean Makoun plays the position of linebacker.\nPrompt: Jean Makoun plays the position of\nA: linebacker\n\n",
+      "New Fact: Mike Richter is a linebacker.\nPrompt: Henrik Lundqvist plays as\nA: goaltender\n\n",
+      "New Fact: Nigel Bradham's position is midfielder.\nPrompt: On the field, what role does Nigel Bradham have?\nA: midfielder\n\n",
+      "New Fact: Greg Buttle now plays as a center.\nPrompt: What position did Mike Curtis play?\nA: linebacker\n\n",
+      "New Fact: Pat Swilling plays as a goaltender.\nPrompt: Pat Swilling plays as a\nA: goaltender\n\n",
+      "New Fact: Yannick Carter is a goaltender.\nPrompt: What position does London Fletcher play?\nA: linebacker\n\n"
+    ]
+  ]
+}

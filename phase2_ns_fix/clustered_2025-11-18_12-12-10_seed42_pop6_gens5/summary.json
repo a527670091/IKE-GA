@@ -1,0 +1,38 @@
+{
+  "timestamp": "2025-11-18_12-12-10",
+  "parameters": {
+    "data_path": "./counterfact.json",
+    "corpus_idx_path": "./corpus_idx.txt",
+    "target_model_name": "EleutherAI/gpt-neo-1.3B",
+    "evo_model_name": "gemini-2.5-pro",
+    "population_size": 6,
+    "num_generations": 5,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.6,
+    "k_demos": 10,
+    "min_cluster_size": 5,
+    "max_cluster_size": null,
+    "top_k_clusters": 1,
+    "seed": 42,
+    "gpu_devices": "0,1",
+    "output_dir": "./phase2_ns_fix/clustered_2025-11-18_12-12-10_seed42_pop6_gens5"
+  },
+  "num_clusters_evolved": 1,
+  "total_time_seconds": 1234.7254552841187,
+  "cluster_results": {
+    "P413": {
+      "num_facts": 95,
+      "pareto_front_size": 6,
+      "best_fitness": {
+        "efficacy": 1.0,
+        "generalization": 0.9736842105263158,
+        "specificity": 0.24210526315789474
+      },
+      "avg_pareto_fitness": {
+        "efficacy": 0.9789473684210526,
+        "generalization": 0.8491228070175438,
+        "specificity": 0.16473684210526315
+      }
+    }
+  }
+}
